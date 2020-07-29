@@ -1,6 +1,9 @@
-# daily_expense
+# Flutter_DailyExpense
 
-A new Flutter application.
+## Simple flutter app to track down your daily expense
+This app consist of the chart which show the total expense of each day of the week 
+Then the individual expense with show the price , title and date it was spend.
+There are two ways to add the Transaction. User have to provide the title date and amount of the spend so it will be update both the chart the transaction list
 
 ## Getting Started
 
