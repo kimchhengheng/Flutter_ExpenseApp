@@ -1,13 +1,28 @@
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+
+
 
 class Transaction  {
-  final String id;
-  final String title;
-  final double amount;
-  final DateTime date;
-
-  Transaction({@required this.id,@required  this.title,@required  this.amount,@required  this.date});
+  static int _id=0;
 
 
+  String _title;
+  double _amount;
+  DateTime _date;
+
+
+
+  Transaction(title, amount) {
+    _id++;
+    this._title = title;
+    this._amount = amount;
+    this._date =DateTime.now();
+  }
+
+  static int get id => _id;
+
+  String get title => _title;
+
+  double get amount => _amount;
+
+  DateTime get date => _date;
 }
