@@ -25,7 +25,9 @@ class Transactionlist extends StatelessWidget {
 //        so we can used as the loop to generate the list which is scrollable for our transaction list
           return Card(child: Row(children: <Widget>[
                 Container(
-                  child: Text("\$ ${transactions[index].amount.toStringAsFixed(2)}"),
+                  child: Text("\$ ${transactions[index].amount.toStringAsFixed(2)}" ),
+//                  style: Theme.of(context).textTheme.bodyText1, i dont know why when define one the other child cannot find the default which i include alredy
+                  // instead of using textstyle every where we make theme so it easy to change , in the textThemee we access like a key title
                   margin: EdgeInsets.all(10),
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
@@ -34,12 +36,12 @@ class Transactionlist extends StatelessWidget {
                 ),
                 Column(children: <Widget>[
                   Container(
-                    child: Text("${transactions[index].title}"),
+                    child: Text("${transactions[index].title}" ,),
                     padding: EdgeInsets.all(2.5),
                     margin: EdgeInsets.all(2.5),
                   ),
                   Container(
-                    child: Text(DateFormat.yMMMM().format(transactions[index].date)),
+                    child: Text(DateFormat.yMMMd().format(transactions[index].date)),
                     padding: EdgeInsets.all(2.5),
                     margin: EdgeInsets.all(2.5),
                   ),
