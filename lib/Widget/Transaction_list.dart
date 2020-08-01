@@ -4,8 +4,8 @@ import 'package:intl/intl.dart';
 // just the blue print for display  transaction list, we dont handle the add and delete
 class Transactionlist extends StatelessWidget {
   final List<Transaction> transactions;
-
-  const Transactionlist( this.transactions) ;
+  final Function deletetx;
+  const Transactionlist( this.transactions, this.deletetx) ;
 
 // column and row is not scrol able so we could at single child scrolable
 //  we can also implement by ListView instead of row or column
@@ -21,35 +21,50 @@ class Transactionlist extends StatelessWidget {
       height: 400,// without height flutter canot diplay
       child: ListView.builder(
         itemBuilder: (ctx,index) {
+          return Card(
+            child: ListTile(
+              leading: CircleAvatar(
+                radius: 30,
+                child: Padding(
+                    padding: EdgeInsets.all(5),
+                    child: FittedBox(child: Text("\$ ${transactions[index].amount.toStringAsFixed(2)}" ))) ,
+              ),
+              title:  Text("${transactions[index].title}" ,),
+              subtitle: Text(DateFormat.yMMMd().format(transactions[index].date)),
+              trailing: IconButton(icon: Icon(Icons.delete_outline, ), onPressed: () {deletetx(transactions[index].id);} , ),
+            ),
+          );
+
 //        this item builder : flutter gonna call this function automatically depend on the number itemcount that we tell iteration by the index can return the widget
 //        so we can used as the loop to generate the list which is scrollable for our transaction list
-          return Card(child: Row(children: <Widget>[
-                Container(
-                  child: Text("\$ ${transactions[index].amount.toStringAsFixed(2)}" ),
-//                  style: Theme.of(context).textTheme.bodyText1, i dont know why when define one the other child cannot find the default which i include alredy
-                  // instead of using textstyle every where we make theme so it easy to change , in the textThemee we access like a key title
-                  margin: EdgeInsets.all(10),
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Theme.of(context).primaryColorDark, width: 2),
-                      borderRadius: BorderRadius.circular(10)),
-                ),
-                Column(children: <Widget>[
-                  Container(
-                    child: Text("${transactions[index].title}" ,),
-                    padding: EdgeInsets.all(2.5),
-                    margin: EdgeInsets.all(2.5),
-                  ),
-                  Container(
-                    child: Text(DateFormat.yMMMd().format(transactions[index].date)),
-                    padding: EdgeInsets.all(2.5),
-                    margin: EdgeInsets.all(2.5),
-                  ),
-                ],
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,)
-              ])
-              );
+//          return Card(child: Row(children: <Widget>[
+//
+//                Container(
+//                  child: Text("\$ ${transactions[index].amount.toStringAsFixed(2)}" ),
+////                  style: Theme.of(context).textTheme.bodyText1, i dont know why when define one the other child cannot find the default which i include alredy
+//                  // instead of using textstyle every where we make theme so it easy to change , in the textThemee we access like a key title
+//                  margin: EdgeInsets.all(10),
+//                  padding: EdgeInsets.all(10),
+//                  decoration: BoxDecoration(
+//                      border: Border.all(color: Theme.of(context).primaryColorDark, width: 2),
+//                      borderRadius: BorderRadius.circular(10)),
+//                ),
+//                Column(children: <Widget>[
+//                  Container(
+//                    child: Text("${transactions[index].title}" ,),
+//                    padding: EdgeInsets.all(2.5),
+//                    margin: EdgeInsets.all(2.5),
+//                  ),
+//                  Container(
+//                    child: Text(DateFormat.yMMMd().format(transactions[index].date)),
+//                    padding: EdgeInsets.all(2.5),
+//                    margin: EdgeInsets.all(2.5),
+//                  ),
+//                ],
+//                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                  crossAxisAlignment: CrossAxisAlignment.start,)
+//              ])
+//              );
             },
 
           // flutter will call this function and passing the context and index of the item that we render

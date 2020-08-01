@@ -22,6 +22,7 @@ void main() {
             textTheme: ThemeData.light().textTheme.copyWith(
                 headline6: TextStyle(fontFamily: 'Shadows', fontSize:20),),
 
+
                 // assign new text them then base on default text them then copy it with some new overite
         )
         // swatch is shade of color avaible when color only color
@@ -34,22 +35,29 @@ void main() {
 class MyApp extends StatefulWidget {
   // not add but start to show the process
   @override
-  _MyAppState createState() => _MyAppState();
+  _MyAppState createState() {
+    print("create state");
+    return _MyAppState();}
 }
 
 class _MyAppState extends State<MyApp> {
 
   final List<Transaction> transactions= [
-//    Transaction( "Grocery",50.0),
-//    Transaction( "Utility",40.0),
-//    Transaction( "Hydro",50.0),
-//    Transaction( "Internet",40.0),
-//    Transaction( "Phone",50.0),
-//    Transaction( "Book",25.0),
+    Transaction(amount: 100000000.0, date: DateTime.now(),id: DateTime.now().toString(),title: "Grocerry" ),
+    Transaction(amount: 50.0, date: DateTime.now(),id: DateTime.now().toString(),title: "hydro" ),
+    Transaction(amount: 50.0, date: DateTime.now(),id: DateTime.now().toString(),title: "phone" ),
+
   ];
-  void _addTransaction(String title, double amount){
+  void _deleteTransaction(String id){
     setState(() {
-      transactions.add(Transaction(title, amount));
+      transactions.removeWhere((tx) {
+        return tx.id == id;
+      });
+    });
+  }
+  void _addTransaction(String title, double amount,DateTime date ){
+    setState(() {
+      transactions.add(Transaction(amount: amount, date: date, id: DateTime.now().toString(),title: title ));
     });
   }
   void _startAddNewTransaction(BuildContext ctx){
@@ -118,7 +126,7 @@ class _MyAppState extends State<MyApp> {
                   )
 
                 ) 
-                    : Transactionlist(transactions),
+                    : Transactionlist(transactions, _deleteTransaction),
 //we can check the empty transaction and chart bar
               ],
             ),

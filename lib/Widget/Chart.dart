@@ -34,7 +34,7 @@ class Chart extends StatelessWidget {
 //      DateFormat is the intl package to change the format of date time object
 
     }
-    ).toList();
+    ).reversed.toList();
 //  without tolist it return iterable object not a list
   }
   double get totalSpending {
