@@ -76,13 +76,13 @@ class _NewTransactionState extends State<NewTransaction> {
     return
       SingleChildScrollView(
       // this make the scroable of the child of this but still hide behind the keybard in landscape
-//        without the this single child the height of bottom sheet with scrollable outside make it too high
+//        without the this single child the height of bottom sheet with scrollable outside make it too hight
       child: Container(
         padding: EdgeInsets.only(
             top: 10,
             left: 10,
             right: 10,
-            bottom:( MediaQuery.of(context).viewInsets.bottom ) +10 // this avoid the overlap of the container and the key board
+            bottom:( MediaQuery.of(context).viewInsets.bottom ) +10 // this make the padding move by the keyboard bottom but still some overflow of container so make it Single child
         ),
 
         child: Column(

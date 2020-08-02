@@ -80,6 +80,7 @@ class _MyAppState extends State<MyApp> {
   void _startAddNewTransaction(BuildContext ctx) {
     showModalBottomSheet(
         isScrollControlled:true, // this improve the bottom sheet and the keyboard make it more upper and scrollable
+//      it'll allow the bottom sheet to take the full required height which gives more insurance that TextField is not covered by the keyboard.
         context: ctx,
         builder: (bctx) {
           return GestureDetector(
