@@ -73,10 +73,18 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      // this make the scroable
-      child: Padding(
-        padding: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: MediaQuery.of(context).viewInsets.bottom +10),
+    return
+      SingleChildScrollView(
+      // this make the scroable of the child of this but still hide behind the keybard in landscape
+//        without the this single child the height of bottom sheet with scrollable outside make it too high
+      child: Container(
+        padding: EdgeInsets.only(
+            top: 10,
+            left: 10,
+            right: 10,
+            bottom:( MediaQuery.of(context).viewInsets.bottom ) +10 // this avoid the overlap of the container and the key board
+        ),
+
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[

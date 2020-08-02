@@ -15,11 +15,14 @@ class Transactionlist extends StatelessWidget {
 //  vs ListView.builder() only load what visible, good for memory show the visible the part not on the screen would be not render,
   @override
   Widget build(BuildContext context) {
+    final h = MediaQuery.of(context).size.height;
+    final w =  MediaQuery.of(context).size.width;
+
     // we can make scrollable by wrap the column with SingleChildScrollView and specify the height of the screen
 //        we can also use the ListView wrape the column but need container outside because flutter cannot define the height if not container
-    return Container(
-      height: 400,// without height flutter canot diplay
-      child: ListView.builder(
+    return ListView.builder(
+    //        the size of the screen is dynamic so we calculate it dynamic MediaQuery automatically call build when it change the value, but we need app bar so i call it in the main
+      // without height flutter canot diplay
         itemBuilder: (ctx,index) {
           return Card(
             child: ListTile(
@@ -31,9 +34,19 @@ class Transactionlist extends StatelessWidget {
               ),
               title:  Text("${transactions[index].title}" ,),
               subtitle: Text(DateFormat.yMMMd().format(transactions[index].date)),
-              trailing: IconButton(icon: Icon(Icons.delete_outline, ), onPressed: () {deletetx(transactions[index].id);} , ),
+              trailing: Row(
+                  mainAxisSize: MainAxisSize.min, // without it row take the all the available spaace
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  IconButton(icon: Icon(Icons.delete_outline, color: Theme.of(context).primaryColorDark,), onPressed: () {deletetx(transactions[index].id);} , ),
+                  h>w? Text("") : Text("Delete", style: TextStyle(color: Theme.of(context).primaryColorDark),)
+              ],)
             ),
           );
+        },
+        itemCount: transactions.length,// how many item will be build so it is the lenght of transactions
+          );
+// flutter will call this function and passing the context and index of the item that we render
 
 //        this item builder : flutter gonna call this function automatically depend on the number itemcount that we tell iteration by the index can return the widget
 //        so we can used as the loop to generate the list which is scrollable for our transaction list
@@ -65,12 +78,10 @@ class Transactionlist extends StatelessWidget {
 //                  crossAxisAlignment: CrossAxisAlignment.start,)
 //              ])
 //              );
-            },
 
-          // flutter will call this function and passing the context and index of the item that we render
-        itemCount: transactions.length,// how many item will be build so it is the lenght of transactions
 
-      )
-      );
+
+
+
     }
 }
