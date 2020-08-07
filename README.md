@@ -9,6 +9,13 @@ The transaction is the scrollable list. To add a new transaction, User can click
 It would display the page to get input of the transaction name, amount, date by choosing the from first day of the year to current day.<br/>
 
 
+
+
+![media1_x4GOkre2 compressed-_online-video-cutter com_](https://user-images.githubusercontent.com/43865591/89694833-ed5fb300-d8df-11ea-89c3-899b6f6bdf4f.gif)
+
+
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
